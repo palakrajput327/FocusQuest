@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FocusQuest: RPG Pomodoro</title>
+    <!-- Google Fonts for RPG Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- RPG Theme CSS -->
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+
+    <!-- Header: Displays Game Title and Player Progression -->
+    <header>
+        <h1>FocusQuest</h1>
+        <div id="player-stats">
+            <span>Level: <span id="current-level">1</span></span>
+            <span>XP: <span id="current-xp">0</span> / 100</span>
+            <span>Gold: <span id="current-gold">0</span></span>
+        </div>
+    </header>
+
+    <div class="app-layout">
+        
+        <!-- Side Panel: Quest Log (To-Do List) -->
+        <aside id="quest-log-panel">
+            <h2>Quest Log</h2>
+            <ul id="quest-list">
+                <!-- Quests will be dynamically added here later -->
+                <li>Add Quest Input</li>
+            </ul>
+        </aside>
+
+        <!-- Main Content: The Pomodoro Timer -->
+        <main>
+            <section id="timer-section">
+                <h2>The Focus Forge</h2>
+                <div id="time-display">25:00</div>
+                <div id="timer-controls">
+                    <button id="start-btn">Start</button>
+                    <button id="pause-btn">Pause</button>
+                    <button id="reset-btn">Reset</button>
+                </div>
+            </section>
+        </main>
+
+        <!-- Side Panel: Shop / Inventory -->
+        <aside id="shop-panel">
+            <h2>Merchant Shop</h2>
+            <div id="shop-items">
+                <!-- Items to buy will go here -->
+                <div>Health Potion (50g)</div>
+            </div>
+            
+            <h2>Inventory</h2>
+            <div id="inventory-grid">
+                <!-- Purchased items will appear here -->
+            </div>
+        </aside>
+
+    </div>
+
+</body>
+</html>
