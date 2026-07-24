@@ -38,7 +38,7 @@ h1, h2, h3 {
 /* Header Flexbox Layout */
 header {
     background-color: var(--color-bg-panel);
-    border-bottom: 2px solid var(--color-border);
+    border-bottom: 10px solid var(--color-border);
     padding: 20px 40px;
     display: flex;
     justify-content: space-between;
