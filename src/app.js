@@ -1,14 +1,23 @@
 // State Management
-const DEFAULT_TIME = 25 * 60; // 25 minutes in seconds
+const DEFAULT_TIME =  25*60; // 25 minutes in seconds
 let timeLeft = DEFAULT_TIME;
 let timerInterval = null;
 let isRunning = false;
+
+// Player Gamification State
+let playerLevel = 1;
+let playerXP = 0;
+let playerGold = 0;
 
 // DOM Elements
 const timeDisplay = document.getElementById('time-display');
 const startBtn = document.getElementById('start-btn');
 const pauseBtn = document.getElementById('pause-btn');
 const resetBtn = document.getElementById('reset-btn');
+
+const levelDisplay = document.getElementById('current-level');
+const xpDisplay = document.getElementById('current-xp');
+const goldDisplay = document.getElementById('current-gold');
 
 // Utility: Format seconds into MM:SS
 function formatTime(seconds) {
@@ -25,6 +34,21 @@ function formatTime(seconds) {
 // Update the DOM Display
 function updateDisplay() {
     timeDisplay.textContent = formatTime(timeLeft);
+    levelDisplay.textContent = playerLevel;
+    xpDisplay.textContent = playerXP;
+    goldDisplay.textContent = playerGold;
+}
+
+// Gamification Logic
+function rewardPlayer() {
+    playerXP += 50;
+    playerGold += 25;
+    
+    if (playerXP >= 100) {
+        playerLevel++;
+        playerXP -= 100;
+        alert(`Level Up! You are now Level ${playerLevel}!`);
+    }
 }
 
 // Timer Logic
@@ -41,8 +65,9 @@ function startTimer() {
         if (timeLeft <= 0) {
             clearInterval(timerInterval);
             isRunning = false;
-            // Phase 4 will hook in here to grant XP and Gold!
-            alert("Focus Session Complete! (XP & Gold coming in Phase 4!)");
+            rewardPlayer(); // Grant XP and Gold
+            timeLeft = DEFAULT_TIME; // Reset for next session
+            updateDisplay();
         }
     }, 1000);
 }
