@@ -9,6 +9,14 @@ let playerLevel = 1;
 let playerXP = 0;
 let playerGold = 0;
 
+// Shop & Inventory State
+const shopItems = [
+    { id: "potion", name: "Health Potion", cost: 50 },
+    { id: "elixir", name: "Mana Elixir", cost: 100 },
+    { id: "sword", name: "Wooden Sword", cost: 250 }
+];
+const playerInventory = [];
+
 // DOM Elements
 const timeDisplay = document.getElementById('time-display');
 const startBtn = document.getElementById('start-btn');
@@ -18,6 +26,13 @@ const resetBtn = document.getElementById('reset-btn');
 const levelDisplay = document.getElementById('current-level');
 const xpDisplay = document.getElementById('current-xp');
 const goldDisplay = document.getElementById('current-gold');
+
+const questInput = document.getElementById('quest-input');
+const addQuestBtn = document.getElementById('add-quest-btn');
+const questList = document.getElementById('quest-list');
+
+const shopItemsContainer = document.getElementById('shop-items');
+const inventoryGrid = document.getElementById('inventory-grid');
 
 // Utility: Format seconds into MM:SS
 function formatTime(seconds) {
@@ -49,6 +64,83 @@ function rewardPlayer() {
         playerXP -= 100;
         alert(`Level Up! You are now Level ${playerLevel}!`);
     }
+}
+
+// Quest Logic
+function addQuest() {
+    const questName = questInput.value.trim();
+    if (questName === "") return;
+    
+    const newQuest = document.createElement("li");
+    
+    const textNode = document.createElement("span");
+    textNode.textContent = questName;
+    newQuest.appendChild(textNode);
+    
+    const completeBtn = document.createElement("button");
+    completeBtn.textContent = "Complete";
+    completeBtn.className = "complete-btn";
+    completeBtn.addEventListener("click", function() {
+        playerXP += 20;
+        playerGold += 10;
+        
+        if (playerXP >= 100) {
+            playerLevel++;
+            playerXP -= 100;
+            alert(`Level Up! You are now Level ${playerLevel}!`);
+        }
+        
+        updateDisplay();
+        newQuest.remove();
+    });
+    
+    newQuest.appendChild(completeBtn);
+    questList.appendChild(newQuest);
+    
+    questInput.value = "";
+}
+
+// Shop Logic
+function renderShop() {
+    shopItemsContainer.innerHTML = '';
+    
+    shopItems.forEach(item => {
+        const itemDiv = document.createElement("div");
+        
+        const nameSpan = document.createElement("span");
+        nameSpan.textContent = `${item.name} (${item.cost}g)`;
+        
+        const buyBtn = document.createElement("button");
+        buyBtn.textContent = "Buy";
+        buyBtn.className = "complete-btn";
+        
+        buyBtn.addEventListener("click", () => {
+            if (playerGold >= item.cost) {
+                playerGold -= item.cost;
+                playerInventory.push(item);
+                updateDisplay();
+                renderInventory();
+                alert(`Purchased ${item.name}!`);
+            } else {
+                alert(`Not enough gold for ${item.name}! You need ${item.cost - playerGold} more gold.`);
+            }
+        });
+        
+        itemDiv.appendChild(nameSpan);
+        itemDiv.appendChild(buyBtn);
+        shopItemsContainer.appendChild(itemDiv);
+    });
+}
+
+function renderInventory() {
+    inventoryGrid.innerHTML = '';
+    
+    playerInventory.forEach(item => {
+        const slot = document.createElement("div");
+        slot.className = "inventory-slot";
+        slot.textContent = item.name;
+        inventoryGrid.appendChild(slot);
+    });
 }
 
 // Timer Logic
@@ -90,6 +182,9 @@ function resetTimer() {
 startBtn.addEventListener('click', startTimer);
 pauseBtn.addEventListener('click', pauseTimer);
 resetBtn.addEventListener('click', resetTimer);
+addQuestBtn.addEventListener('click', addQuest);
 
 // Initialize Display
 updateDisplay();
+renderShop();
+renderInventory();

@@ -102,6 +102,45 @@ li {
     margin-bottom: 8px;
     border-left: 3px solid var(--color-gold);
     border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Quest Input */
+.quest-input-container {
+    display: flex;
+    margin-bottom: 15px;
+    gap: 5px;
+}
+
+#quest-input {
+    flex: 1;
+    background-color: var(--color-bg-deep);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-main);
+    padding: 8px;
+    border-radius: 4px;
+    font-family: var(--font-body);
+}
+
+#quest-input:focus {
+    outline: none;
+    border-color: var(--color-gold);
+}
+
+.quest-input-container button {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+}
+
+.complete-btn {
+    background-color: var(--color-bg-deep);
+    border: 1px solid var(--color-magic-blue);
+    color: var(--color-magic-blue);
+    font-size: 0.8rem;
+    padding: 5px 10px;
+    margin: 0;
 }
 
 /* The Pomodoro Timer Section */
@@ -182,4 +221,27 @@ button:hover {
 
 #shop-items div:hover {
     background-color: rgba(69, 162, 158, 0.2);
+}
+
+#inventory-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.inventory-slot {
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--color-gold);
+    border-radius: 4px;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    text-align: center;
+    padding: 5px;
+    word-break: break-word;
+    color: var(--color-gold);
+    box-shadow: inset 0 0 5px var(--color-gold-glow);
 }
