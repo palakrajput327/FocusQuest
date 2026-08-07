@@ -11,7 +11,7 @@ let playerGold = 0;
 
 // Shop & Inventory State
 const shopItems = [
-    { id: "potion", name: "Health Potion", cost: 50 },
+    { id: "potion", name: "Health Potion", cost: 100 },
     { id: "elixir", name: "Mana Elixir", cost: 100 },
     { id: "sword", name: "Wooden Sword", cost: 250 }
 ];
